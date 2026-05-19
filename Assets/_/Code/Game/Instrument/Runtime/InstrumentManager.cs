@@ -1,15 +1,24 @@
+using System;
 using UnityEngine;
 
 namespace Instrument.Runtime
 {
     public class InstrumentManager : MonoBehaviour
     {
+        #region Public
+
+        public event Action<float> OnParticleTrigger;
+
+        #endregion
+
+
         #region Unity API
 
-        private void Start()
+        private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
             _audioSource.Play();
+            _audioSource.volume = 0;
         }
         private void Update()
         {
@@ -20,6 +29,7 @@ namespace Instrument.Runtime
             else
             {
                 DecrementVolume();
+                OnParticleTrigger?.Invoke(_particleQuantityNormalized);
             }
         }
         private void OnTriggerEnter2D(Collider2D other)
@@ -63,13 +73,15 @@ namespace Instrument.Runtime
 
         #region Private and Protected
 
+        private AudioSource _audioSource;
+        private float _particleQuantity;
+        private float _particleQuantityNormalized;
+
         [SerializeField] private float _particleQuantityMax;
         [SerializeField] private float _particleQuantityTreshold;
         [SerializeField] private float _fadingInSpeed;
         [SerializeField] private float _fadingOutSpeed;
-        private float _particleQuantity;
-        private float _particleQuantityNormalized;
-        private AudioSource _audioSource;
+
 
         #endregion
     }
