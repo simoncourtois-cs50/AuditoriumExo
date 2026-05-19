@@ -146,7 +146,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.228919, y: 9.228919, z: 9.228919}
+  m_LocalScale: {x: 9.228918, y: 9.228918, z: 9.228918}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 681941201}
@@ -1068,8 +1068,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 0.26638, y: 0.26638, z: 0.26638}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 21846605}
   m_Father: {fileID: 0}
@@ -1982,7 +1982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ec2219004f0d3439f37def1bad0427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Controller::Controller.Runtime.DragAndDrop
-  _forceHalo: {fileID: 21846604}
 --- !u!4 &1916128182
 Transform:
   m_ObjectHideFlags: 0
