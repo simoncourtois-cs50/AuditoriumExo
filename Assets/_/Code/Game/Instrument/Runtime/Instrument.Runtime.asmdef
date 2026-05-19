@@ -1,6 +1,6 @@
 {
-    "name": "ParticleSpawner",
-    "rootNamespace": "ParticleSpawner.Runtime",
+    "name": "Instrument.Runtime",
+    "rootNamespace": "Instrument.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

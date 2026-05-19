@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Deviation
+  - Particle
   layers:
   - Default
   - TransparentFX

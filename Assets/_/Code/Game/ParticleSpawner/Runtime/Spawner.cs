@@ -4,10 +4,17 @@ namespace ParticleSpawner.Runtime
 {
     public class Spawner : MonoBehaviour
     {
+        #region Unity API
+
         private void Update()
         {
             SpawnParticle();
         }
+
+        #endregion
+
+
+        #region Main API
 
         private void SpawnParticle()
         {
@@ -20,10 +27,17 @@ namespace ParticleSpawner.Runtime
             }
         }
 
+        #endregion
+
+
+        #region Private and Protected
+
         private float _elapsedTime;
         [SerializeField] private float _timeBetweenParticle;
         [SerializeField] private float _spawnerRadius;
         [SerializeField] private float _lifeSpanParticle;
         [SerializeField] private GameObject _particle;
+
+        #endregion
     }
 }

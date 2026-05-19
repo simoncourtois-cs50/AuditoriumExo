@@ -1,5 +1,5 @@
 {
-    "name": "Controller",
+    "name": "Controller.Runtime",
     "rootNamespace": "Controller.Runtime",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c"

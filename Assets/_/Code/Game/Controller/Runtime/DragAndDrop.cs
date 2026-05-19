@@ -5,9 +5,8 @@ namespace Controller.Runtime
 {
     public class DragAndDrop : MonoBehaviour
     {
-        private InputAction _clickAction;
-        private Camera _camera;
-        private GameObject _currentDragableObject;
+        #region Unity API
+
         private void Start()
         {
             _clickAction = InputSystem.actions.FindAction("Attack");
@@ -20,12 +19,11 @@ namespace Controller.Runtime
                 Vector3 mousePosition = GetMousePosition();
                 Vector3 direction = mousePosition - _camera.transform.position;
 
-                RaycastHit2D hit = Physics2D.Raycast(_camera.transform.position, direction);
+                Collider2D hit = Physics2D.OverlapPoint(mousePosition);
 
-                if (hit.collider.gameObject.CompareTag("Deviation"))
+                if (hit && hit.transform.CompareTag("Deviation"))
                 {
-                    Debug.Log("hit");
-                    _currentDragableObject = hit.collider.gameObject;
+                    _currentDragableObject = hit.transform.gameObject;
                 }
             }
 
@@ -33,24 +31,38 @@ namespace Controller.Runtime
             {
                 _currentDragableObject = null;
             }
-        }
-        private void LateUpdate()
-        {
             if (_currentDragableObject)
             {
                 _currentDragableObject.transform.position = GetMousePosition();
             }
         }
+
+        #endregion
+
+
+        #region Main API
+
         private Vector3 GetMousePosition()
         {
-            Vector2 mousePosition = Pointer.current.position.ReadValue();
-            float cameraDistance = Vector3.Distance(_camera.transform.position, Vector3.zero);
+            Vector3 mousePosition = Pointer.current.position.ReadValue();
+            //float cameraDistance = Vector3.Distance(_camera.transform.position, Vector3.zero);
+            mousePosition.z = Mathf.Abs(_camera.transform.position.z);
+            //Vector3 mousePositionZCam = new Vector3(mousePosition.x, mousePosition.y, cameraDistance);
 
-            Vector3 mousePositionZCam = new Vector3(mousePosition.x, mousePosition.y, cameraDistance);
-
-            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(mousePositionZCam);
+            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(mousePosition);
             return mouseWorldPosition;
 
         }
+
+        #endregion
+
+
+        #region Private and Protected
+
+        private InputAction _clickAction;
+        private Camera _camera;
+        private GameObject _currentDragableObject;
+
+        #endregion
     }
 }
