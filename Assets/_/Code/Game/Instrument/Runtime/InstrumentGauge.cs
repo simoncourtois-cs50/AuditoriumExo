@@ -20,7 +20,6 @@ namespace Instrument.Runtime
         private void Update()
         {
             _gaugeImage.fillAmount = _currentValidationState / _validationMaxLength;
-            Debug.Log(_currentValidationState);
             IncrementGauge();
             CheckValidation();
         }
