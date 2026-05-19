@@ -6,12 +6,13 @@ namespace Controller.Runtime
     public class DragAndDrop : MonoBehaviour
     {
         #region Unity API
-
-        private void Start()
+        private void Awake()
         {
+            
             _clickAction = InputSystem.actions.FindAction("Attack");
             _camera = Camera.main;
         }
+       
         private void Update()
         {
             if (_clickAction.WasPressedThisFrame())
@@ -45,13 +46,15 @@ namespace Controller.Runtime
         private Vector3 GetMousePosition()
         {
             Vector3 mousePosition = Pointer.current.position.ReadValue();
-            //float cameraDistance = Vector3.Distance(_camera.transform.position, Vector3.zero);
             mousePosition.z = Mathf.Abs(_camera.transform.position.z);
-            //Vector3 mousePositionZCam = new Vector3(mousePosition.x, mousePosition.y, cameraDistance);
 
             Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(mousePosition);
             return mouseWorldPosition;
 
+        }
+        private void ResizeRenderer(GameObject resizableObject)
+        {
+            resizableObject.transform.localScale *= 2f;
         }
 
         #endregion
@@ -62,6 +65,9 @@ namespace Controller.Runtime
         private InputAction _clickAction;
         private Camera _camera;
         private GameObject _currentDragableObject;
+        private bool _currentResizableObject;
+
+        [SerializeField] private GameObject _forceHalo;
 
         #endregion
     }
