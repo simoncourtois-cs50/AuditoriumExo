@@ -828,7 +828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Instrument.Runtime::Instrument.Runtime.InstrumentManager
   _particleQuantityMax: 9
-  _particleQuantityTreshold: 0.3
+  _particleQuantityTreshold: 0.5
   _fadingInSpeed: 1
   _fadingOutSpeed: 0.8
 --- !u!114 &6568621797080554542
@@ -898,7 +898,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.5235849, b: 0.6706352, a: 0.21176471}
+  m_Color: {r: 0.6462264, g: 0.84943783, b: 1, a: 0.21176471}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -954,7 +954,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: bf192a2f271cd4227864f8d29b206645, type: 3}
+  m_Resource: {fileID: 8300000, guid: b6f84b411e7254f379fc645132501a48, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

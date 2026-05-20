@@ -628,14 +628,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2803915903317047498, guid: b4832db0dfab6e94c8995037056d918c, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: b6f84b411e7254f379fc645132501a48, type: 3}
-    - target: {fileID: 3509304454454588101, guid: b4832db0dfab6e94c8995037056d918c, type: 3}
-      propertyPath: _particleQuantityTreshold
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5606933568818162584, guid: b4832db0dfab6e94c8995037056d918c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.17
@@ -679,10 +671,6 @@ PrefabInstance:
     - target: {fileID: 5963983232364739625, guid: b4832db0dfab6e94c8995037056d918c, type: 3}
       propertyPath: m_Name
       value: InstrumentBass
-      objectReference: {fileID: 0}
-    - target: {fileID: 6568621797080554542, guid: b4832db0dfab6e94c8995037056d918c, type: 3}
-      propertyPath: _minRateToValidate
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
