@@ -11,6 +11,8 @@ namespace Controller.Runtime
             
             _clickInput = InputSystem.actions.FindAction("Attack");
             _camera = Camera.main;
+            _maxLocalScaleMagnitude = _maxLocalScale.magnitude;
+            _minLocalScaleMagnitude = _minLocalScale.magnitude;
         }
         
         private void Update()
@@ -117,7 +119,13 @@ namespace Controller.Runtime
         private void Resize()
         {
             _horizontalInput = Mouse.current.delta.x.ReadValue();
-            _currentClickedObject.transform.localScale *= 1 + (_horizontalInput * 0.1f);
+            float currentLocalScaleMagnitude = _currentClickedObject.transform.localScale.magnitude;
+            
+           
+            _currentClickedObject.transform.localScale *= 1 + (_horizontalInput * _resizeSpeed);
+
+            if (currentLocalScaleMagnitude < _minLocalScaleMagnitude) _currentClickedObject.transform.localScale = _minLocalScale;
+            if (currentLocalScaleMagnitude > _maxLocalScaleMagnitude) _currentClickedObject.transform.localScale = _maxLocalScale;
         }
 
         private void CheckClickRelease()
@@ -132,6 +140,13 @@ namespace Controller.Runtime
 
 
         #region Private and Protected
+
+        [SerializeField] private float _resizeSpeed;
+        [SerializeField] private Vector3 _maxLocalScale;
+        [SerializeField] private Vector3 _minLocalScale;
+
+        private float _maxLocalScaleMagnitude;
+        private float _minLocalScaleMagnitude;
 
         private InputAction _clickInput;
         private float _horizontalInput;
