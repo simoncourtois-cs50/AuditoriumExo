@@ -516,7 +516,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3302176943212818374, guid: 35828a054e37ec74693d699adb0d00a6, type: 3}
       propertyPath: m_Name
-      value: UpAreaEffector (1)
+      value: 'UpAreaEffector '
       objectReference: {fileID: 0}
     - target: {fileID: 4253888600047557055, guid: 35828a054e37ec74693d699adb0d00a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Controller::Controller.Runtime.DragAndDrop
   _resizeSpeed: 0.05
-  _maxLocalScale: {x: 0.6, y: 0.6, z: 0.6}
-  _minLocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  _maxResizeScale: {x: 0.6, y: 0.6, z: 0.6}
+  _minResizeScale: {x: 0.2, y: 0.2, z: 0.2}
 --- !u!4 &1916128182
 Transform:
   m_ObjectHideFlags: 0

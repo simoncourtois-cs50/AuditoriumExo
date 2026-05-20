@@ -32,11 +32,13 @@ namespace ParticleSpawner.Runtime
 
         #region Private and Protected
 
-        private float _elapsedTime;
+        [Header("Reference")]
+        [SerializeField] private GameObject _particle;
+        [Header("Parameters")]
         [SerializeField] private float _timeBetweenParticle;
         [SerializeField] private float _spawnerRadius;
         [SerializeField] private float _lifeSpanParticle;
-        [SerializeField] private GameObject _particle;
+        private float _elapsedTime;
 
         #endregion
     }

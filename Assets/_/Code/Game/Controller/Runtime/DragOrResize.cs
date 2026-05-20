@@ -3,16 +3,17 @@ using UnityEngine.InputSystem;
 
 namespace Controller.Runtime
 {
-    public class DragAndDrop : MonoBehaviour
+    public class DragOrResize : MonoBehaviour
     {
         #region Unity API
+
         private void Awake()
         {
             
             _clickInput = InputSystem.actions.FindAction("Attack");
             _camera = Camera.main;
-            _maxLocalScaleMagnitude = _maxLocalScale.magnitude;
-            _minLocalScaleMagnitude = _minLocalScale.magnitude;
+            _maxLocalScaleMagnitude = _maxResizeScale.magnitude;
+            _minLocalScaleMagnitude = _minResizeScale.magnitude;
         }
         
         private void Update()
@@ -30,29 +31,11 @@ namespace Controller.Runtime
             switch (_currentState)
             {
                 case State.Rest:
-                    
                     if (_clickInput.WasPressedThisFrame())
                     {
                         Vector3 mousePosition = GetMousePosition();
-
                         Collider2D hit = Physics2D.OverlapPoint(mousePosition);
-
-                        if (hit && hit.transform.CompareTag("Deviation"))
-                        {
-                            _currentClickedObject = hit.transform.gameObject;
-                            BoxCollider2D hitCollider = _currentClickedObject.GetComponent<BoxCollider2D>();
-                    
-                            Vector2 width = Vector2.Scale(hitCollider.size, _currentClickedObject.transform.lossyScale);
-                    
-                            if (Vector3.Distance(_currentClickedObject.transform.position, GetMousePosition()) > (width.x * (0.6 * 0.5)))
-                            {
-                                ChangeState(State.Resize);
-                            }
-                            else
-                            {
-                                ChangeState(State.Drag);
-                            }
-                        }
+                        CheckMousePosition(hit);
                     }
                     break;
                 
@@ -63,12 +46,14 @@ namespace Controller.Runtime
                     }
                     CheckClickRelease();
                     break;
+
                 case State.Resize:
                     Resize();
                     CheckClickRelease();
                     break;
             }
         }
+
         private void OnEnterState()
         {
             switch (_currentState)
@@ -82,6 +67,7 @@ namespace Controller.Runtime
                     break;
             }
         }
+
         private void OnExitState()
         {
             switch (_currentState)
@@ -104,7 +90,28 @@ namespace Controller.Runtime
 
         #endregion
 
+
         #region Main API
+
+        private void CheckMousePosition(Collider2D hit)
+        {
+            if (hit && hit.transform.CompareTag("Deviation"))
+            {
+                _currentClickedObject = hit.transform.gameObject;
+                BoxCollider2D hitCollider = _currentClickedObject.GetComponent<BoxCollider2D>();
+
+                Vector2 width = Vector2.Scale(hitCollider.size, _currentClickedObject.transform.lossyScale);
+
+                if (Vector3.Distance(_currentClickedObject.transform.position, GetMousePosition()) > (width.x * (0.6 * 0.5)))
+                {
+                    ChangeState(State.Resize);
+                }
+                else
+                {
+                    ChangeState(State.Drag);
+                }
+            }
+        }
 
         private Vector3 GetMousePosition()
         {
@@ -124,8 +131,8 @@ namespace Controller.Runtime
            
             _currentClickedObject.transform.localScale *= 1 + (_horizontalInput * _resizeSpeed);
 
-            if (currentLocalScaleMagnitude < _minLocalScaleMagnitude) _currentClickedObject.transform.localScale = _minLocalScale;
-            if (currentLocalScaleMagnitude > _maxLocalScaleMagnitude) _currentClickedObject.transform.localScale = _maxLocalScale;
+            if (currentLocalScaleMagnitude < _minLocalScaleMagnitude) _currentClickedObject.transform.localScale = _minResizeScale;
+            if (currentLocalScaleMagnitude > _maxLocalScaleMagnitude) _currentClickedObject.transform.localScale = _maxResizeScale;
         }
 
         private void CheckClickRelease()
@@ -141,24 +148,26 @@ namespace Controller.Runtime
 
         #region Private and Protected
 
+        [Header("Resize")]
         [SerializeField] private float _resizeSpeed;
-        [SerializeField] private Vector3 _maxLocalScale;
-        [SerializeField] private Vector3 _minLocalScale;
+        [SerializeField] private Vector3 _maxResizeScale;
+        [SerializeField] private Vector3 _minResizeScale;
 
         private float _maxLocalScaleMagnitude;
         private float _minLocalScaleMagnitude;
 
         private InputAction _clickInput;
         private float _horizontalInput;
+
         private Camera _camera;
         private GameObject _currentClickedObject;
+
         private enum State
         {
             Rest,
             Drag,
             Resize
         }
-
         private State _currentState;
 
         #endregion

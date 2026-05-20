@@ -10,13 +10,14 @@ namespace Instrument.Runtime
         private void Awake()
         {
             _currentValidationState = 0f;
-            
         }
+
         private void Start()
         {
             _instrument = GetComponent<InstrumentManager>();
             _instrument.OnParticleTrigger += HandleOnTrigger;
         }
+
         private void Update()
         {
             _gaugeImage.fillAmount = _currentValidationState / _validationMaxLength;
@@ -47,6 +48,7 @@ namespace Instrument.Runtime
                 _currentValidationState = Mathf.Clamp(_currentValidationState, 0, _validationMaxLength);
             }
         }
+
         private void CheckValidation()
         {
             if (_currentValidationState >= _validationMaxLength) Debug.Log("Success");
@@ -57,11 +59,13 @@ namespace Instrument.Runtime
 
         #region Private and Protected
 
+        [Header("Reference")]
+        [SerializeField] private Image _gaugeImage;
+        [Header("Parameters")]
         [SerializeField] private float _gaugeIncrementationSpeed;
         [SerializeField] private float _gaugeDecrementationSpeed;
         [SerializeField] private float _validationMaxLength;
         [SerializeField] private float _minRateToValidate;
-        [SerializeField] private Image _gaugeImage;
 
         private InstrumentManager _instrument;
         private float _currentParticuleRatio;

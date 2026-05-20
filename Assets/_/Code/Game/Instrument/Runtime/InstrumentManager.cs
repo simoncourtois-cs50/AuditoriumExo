@@ -20,6 +20,7 @@ namespace Instrument.Runtime
             _audioSource.Play();
             _audioSource.volume = 0;
         }
+
         private void Update()
         {
             if(GetNormalizedParticleQuantity() > _particleQuantityTreshold)
@@ -32,6 +33,7 @@ namespace Instrument.Runtime
                 OnParticleTrigger?.Invoke(_particleQuantityNormalized);
             }
         }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Particle"))
@@ -39,6 +41,7 @@ namespace Instrument.Runtime
                 _particleQuantity++;
             }
         }
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Particle"))
@@ -57,11 +60,13 @@ namespace Instrument.Runtime
             _particleQuantityNormalized = _particleQuantity / _particleQuantityMax;
             return _particleQuantityNormalized;
         }
+
         private void IncrementVolume()
         { 
             float volume = _fadingInSpeed * Time.deltaTime;
             _audioSource.volume += volume;
         }
+
         private void DecrementVolume()
         {
             float volume =  _fadingOutSpeed * Time.deltaTime;  
@@ -81,7 +86,6 @@ namespace Instrument.Runtime
         [SerializeField] private float _particleQuantityTreshold;
         [SerializeField] private float _fadingInSpeed;
         [SerializeField] private float _fadingOutSpeed;
-
 
         #endregion
     }
