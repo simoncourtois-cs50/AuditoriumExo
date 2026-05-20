@@ -10,7 +10,7 @@ namespace Instrument.Runtime
         private void Awake()
         {
             _currentValidationState = 0f;
-            _minRateToValidate = 0.4f;
+            
         }
         private void Start()
         {
